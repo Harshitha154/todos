@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./output.css">
+</head>
+<body class="bg-slate-50 flex justify-center items-center h-screen">
+    <!-- Outer container to center the inner div -->
+    <div class="bg-white w-[350px] h-[400px] rounded-lg shadow-lg shadow-black p-5">
+        <h1 class="font-bold text-center m-5 text-[#E34432]">Todo List</h1>
+        <div class="flex space-x-2">
+            <input id="inp" type="text" placeholder="Add Todo" class="border-2 border-[#E34432] rounded-md ml-5 hover:border-black duration-200 flex-grow bg-white text-black">
+            <button id="submit" class="bg-[#E34432] text-white rounded-sm w-16 font-bold hover:bg-black hover:text-[#E34432]">Add</button>
+        </div>
+        <!-- Display todos -->
+        <div id="content" class="mt-5 bg-gray-300 p-3 space-y-2 rounded-md overflow-y-auto h-[250px]">
+            <!-- Todos will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        let inp = document.getElementById("inp");
+        let btn = document.getElementById("submit");
+        let display = document.getElementById("content");
+
+        function handlesubmit() {
+            // Log to see if this function is triggered
+            console.log("Button clicked!");
+
+            let val = inp.value.trim();
+            if (val) {
+                let displaydiv = document.createElement("div");
+                displaydiv.classList.add("bg-white", "p-2", "rounded-md", "shadow-md", "flex", "justify-between", "items-center");
+
+                let displayspan = document.createElement("span");
+                displayspan.textContent = val;
+                displayspan.classList.add("text-black");
+
+                // Create the delete button
+                let deletebutton = document.createElement("button");
+                deletebutton.classList.add("rounded-lg", "p-2", "bg-[#E34432]", "text-white", "hover:bg-black");
+                deletebutton.textContent = "Delete";
+
+                // Append the span and delete button to the display div
+                displaydiv.appendChild(displayspan);
+                displaydiv.appendChild(deletebutton);
+
+                // Append the new todo to the display area
+                display.appendChild(displaydiv);
+
+                // Clear the input field
+                inp.value = "";
+            } else {
+                console.log("Input is empty, no todo added");
+            }
+        }
+
+        // Event listener to handle adding todo when button is clicked
+        btn.addEventListener('click', handlesubmit);
+    </script>
+</body>
+</html>
